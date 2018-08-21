@@ -33,8 +33,9 @@ import DialogInput from 'react-native-dialog-input';
  isDialogVisible       | Condition to show or hide the DialogInput   |   Boolean
  title                 | Title to show in the DialogInput            |   String (OPTIONAL)
  message               | Message to show in the DialogInput          |   String (OPTIONAL)
+ multiline             | To make DialogInput multiline          |   Boolean (OPTIONAL)
  hintInput             | Text hint to show in the TextInput          |   String (OPTIONAL)
- textInputProps        | Additional properties to add to the TextInput in the form:<BR> `textInputProps={{autoCorrect:false}}`  Currently supports:<BR>autoCorrect<BR>autoCapitalize<BR>clearButtonMode<BR>clearTextOnFocus <BR>keyboardType          |    Object (OPTIONAL)
+ textInputProps        | Additional properties to add to the TextInput in the form:<BR> `textInputProps={{autoCorrect:false}}`  Currently supports:<BR>autoCorrect<BR>autoCapitalize<BR>clearButtonMode<BR>clearTextOnFocus <BR>keyboardType <BR>required           |    Object (OPTIONAL)
 modalStyle   | Styles for the blocking view behind the DialogInput             |   Object (OPTIONAL)
 dialogStyle             | Styles for the DialogInput main view                        |   Object (OPTIONAL)
 cancelText             | Replacement text for the Cancel button      |   String (OPTIONAL)
