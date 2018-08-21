@@ -35,6 +35,7 @@ class DialogInput extends React.Component{
               <Text style={[this.props.message ? styles.message_modal : {height:0} ]}>{this.props.message}</Text>
               <TextInput style={styles.input_container}
                 multiline={(textProps && textProps.multiline)?true:false}
+                maxLength = {(textProps && textProps.maxLength) ? textProps.maxLength : (textProps.multiline ? 200 : 50)}
                 autoCorrect={(textProps && textProps.autoCorrect==false)?false:true}
                 autoCapitalize={(textProps && textProps.autoCapitalize)?textProps.autoCapitalize:'none'}
                 clearButtonMode={(textProps && textProps.clearButtonMode)?textProps.clearButtonMode:'never'}

@@ -34,6 +34,7 @@ import DialogInput from 'react-native-dialog-input';
  title                 | Title to show in the DialogInput            |   String (OPTIONAL)
  message               | Message to show in the DialogInput          |   String (OPTIONAL)
  multiline             | To make DialogInput multiline          |   Boolean (OPTIONAL)
+ maxLength             | Limits the maximum number of characters that can be entered  in the DialogInput<br> default values: if multiline, 200 else 50       |   Number (OPTIONAL)
  hintInput             | Text hint to show in the TextInput          |   String (OPTIONAL)
  textInputProps        | Additional properties to add to the TextInput in the form:<BR> `textInputProps={{autoCorrect:false}}`  Currently supports:<BR>autoCorrect<BR>autoCapitalize<BR>clearButtonMode<BR>clearTextOnFocus <BR>keyboardType <BR>required           |    Object (OPTIONAL)
 modalStyle   | Styles for the blocking view behind the DialogInput             |   Object (OPTIONAL)
