@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Modal, TextInput, TouchableOpacity,
 class DialogInput extends React.Component{
   constructor(props){
     super(props);
-    this.state = {inputModal:''}
+    this.state = {inputModal:'',submitDisabled:true}
   }
   render(){
     let title = this.props.title || '';
@@ -16,6 +16,7 @@ class DialogInput extends React.Component{
     let dialogStyleProps = this.props.dialogStyle || {};
     var cancelText = this.props.cancelText || 'Cancel';
     var submitText = this.props.submitText || 'Submit';
+    var isInputRequired = (textProps && textProps.required )|| false;
     cancelText = (Platform.OS === 'ios')? cancelText:cancelText.toUpperCase();
     submitText = (Platform.OS === 'ios')? submitText:submitText.toUpperCase();
 
@@ -33,6 +34,8 @@ class DialogInput extends React.Component{
               <Text style={styles.title_modal}>{title}</Text>
               <Text style={[this.props.message ? styles.message_modal : {height:0} ]}>{this.props.message}</Text>
               <TextInput style={styles.input_container}
+                multiline={(textProps && textProps.multiline)?true:false}
+                maxLength = {(textProps && textProps.maxLength) ? textProps.maxLength : (textProps.multiline ? 200 : 50)}
                 autoCorrect={(textProps && textProps.autoCorrect==false)?false:true}
                 autoCapitalize={(textProps && textProps.autoCapitalize)?textProps.autoCapitalize:'none'}
                 clearButtonMode={(textProps && textProps.clearButtonMode)?textProps.clearButtonMode:'never'}
@@ -40,7 +43,16 @@ class DialogInput extends React.Component{
                 keyboardType={(textProps && textProps.keyboardType)?textProps.keyboardType:'default'}
                 underlineColorAndroid='transparent'
                 placeholder={hintInput}
-                onChangeText={(inputModal) => this.setState({inputModal})}
+                onChangeText={(inputModal) =>{
+                  if(inputModal.trim()){
+                    this.setState({inputModal:inputModal,submitDisabled:false})
+                  }else{
+                    if(isInputRequired)
+                    this.setState({inputModal:inputModal,submitDisabled:true})
+                    else
+                    this.setState({inputModal});
+                  }
+                }}
                 />
             </View>
             <View style={styles.btn_container}>
@@ -51,11 +63,11 @@ class DialogInput extends React.Component{
                 <Text style={styles.btn_modal_left}>{cancelText}</Text>
               </TouchableOpacity>
 	            <View style={styles.divider_btn}></View>
-              <TouchableOpacity  style={styles.touch_modal}
+              <TouchableOpacity disabled={this.state.submitDisabled && isInputRequired} style={styles.touch_modal}
                 onPress={() => {
                   this.props.submitInput(this.state.inputModal);
                 }}>
-                <Text style={styles.btn_modal_right}>{submitText}</Text>
+                <Text style={this.state.submitDisabled && isInputRequired ?styles.btn_modal_right_disabled:styles.btn_modal_right}>{submitText}</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -210,6 +222,23 @@ const styles = StyleSheet.create({
       android: {
         textAlign:'right',
         color:'#009688',
+        padding: 8
+      },
+    }),
+  },
+  
+  btn_modal_right_disabled:{
+    fontWeight: 'bold',
+    ...Platform.select({
+      ios: {
+        fontSize:18,
+        color:'rgba(0,0,0,0.44)',
+        textAlign:'center',
+        padding: 10,
+      },
+      android: {
+        textAlign:'right',
+        color:'rgba(0,0,0,0.44)',
         padding: 8
       },
     }),
