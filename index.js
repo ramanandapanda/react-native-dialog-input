@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     marginRight: 30,
     ...Platform.select({
       ios: {
-        backgroundColor:'rgba(220,220,220, 0.6)',
+        backgroundColor:'rgba(220,220,220, 0.9)',
         borderRadius: 10,
         minWidth: 300,
       },
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     }),
   },
   modal_body:{
+    maxHeight:500,
     ...Platform.select({
       ios: {
         padding: 10,
