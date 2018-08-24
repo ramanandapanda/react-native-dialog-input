@@ -29,50 +29,50 @@ class DialogInput extends React.Component{
       	  this.props.closeDialog();
       	}}>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={[styles.container, {...modalStyleProps}]}>
-            <View style={[styles.modal_container, {...dialogStyleProps}]}>
-              <View style={styles.modal_body}>
-                <Text style={styles.title_modal}>{title}</Text>
-                <Text style={[this.props.message ? styles.message_modal : {height:0} ]}>{this.props.message}</Text>
-                <TextInput style={styles.input_container}
-                  multiline={(textProps && textProps.multiline)?true:false}
-                  maxLength = {(textProps && textProps.maxLength) ? textProps.maxLength : (textProps.multiline ? 200 : 50)}
-                  autoCorrect={(textProps && textProps.autoCorrect==false)?false:true}
-                  autoCapitalize={(textProps && textProps.autoCapitalize)?textProps.autoCapitalize:'none'}
-                  clearButtonMode={(textProps && textProps.clearButtonMode)?textProps.clearButtonMode:'never'}
-                  clearTextOnFocus={(textProps && textProps.clearTextOnFocus==true)?textProps.clearTextOnFocus:false}
-                  keyboardType={(textProps && textProps.keyboardType)?textProps.keyboardType:'default'}
-                  underlineColorAndroid='transparent'
-                  placeholder={hintInput}
-                  onChangeText={(inputModal) =>{
-                    if(inputModal.trim()){
-                      this.setState({inputModal:inputModal,submitDisabled:false})
-                    }else{
-                      if(isInputRequired)
-                      this.setState({inputModal:inputModal,submitDisabled:true})
-                      else
-                      this.setState({inputModal});
-                    }
-                  }}
-                  />
-              </View>
-              <View style={styles.btn_container}>
-                <TouchableOpacity style={styles.touch_modal}
-                  onPress={() => {
-                    this.props.closeDialog();
-                  }}>
-                  <Text style={styles.btn_modal_left}>{cancelText}</Text>
-                </TouchableOpacity>
-                <View style={styles.divider_btn}></View>
-                <TouchableOpacity disabled={this.state.submitDisabled && isInputRequired} style={styles.touch_modal}
-                  onPress={() => {
-                    this.props.submitInput(this.state.inputModal);
-                  }}>
-                  <Text style={this.state.submitDisabled && isInputRequired ?styles.btn_modal_right_disabled:styles.btn_modal_right}>{submitText}</Text>
-                </TouchableOpacity>
-              </View>
+        <View style={[styles.container, {...modalStyleProps}]}>
+          <View style={[styles.modal_container, {...dialogStyleProps}]}>
+            <View style={styles.modal_body}>
+              <Text style={styles.title_modal}>{title}</Text>
+              <Text style={[this.props.message ? styles.message_modal : {height:0} ]}>{this.props.message}</Text>
+              <TextInput style={styles.input_container}
+                multiline={(textProps && textProps.multiline)?true:false}
+                maxLength = {(textProps && textProps.maxLength) ? textProps.maxLength : (textProps.multiline ? 200 : 50)}
+                autoCorrect={(textProps && textProps.autoCorrect==false)?false:true}
+                autoCapitalize={(textProps && textProps.autoCapitalize)?textProps.autoCapitalize:'none'}
+                clearButtonMode={(textProps && textProps.clearButtonMode)?textProps.clearButtonMode:'never'}
+                clearTextOnFocus={(textProps && textProps.clearTextOnFocus==true)?textProps.clearTextOnFocus:false}
+                keyboardType={(textProps && textProps.keyboardType)?textProps.keyboardType:'default'}
+                underlineColorAndroid='transparent'
+                placeholder={hintInput}
+                onChangeText={(inputModal) =>{
+                  if(inputModal.trim()){
+                    this.setState({inputModal:inputModal,submitDisabled:false})
+                  }else{
+                    if(isInputRequired)
+                    this.setState({inputModal:inputModal,submitDisabled:true})
+                    else
+                    this.setState({inputModal});
+                  }
+                }}
+                />
+            </View>
+            <View style={styles.btn_container}>
+              <TouchableOpacity style={styles.touch_modal}
+                onPress={() => {
+                  this.props.closeDialog();
+                }}>
+                <Text style={styles.btn_modal_left}>{cancelText}</Text>
+              </TouchableOpacity>
+	            <View style={styles.divider_btn}></View>
+              <TouchableOpacity disabled={this.state.submitDisabled && isInputRequired} style={styles.touch_modal}
+                onPress={() => {
+                  this.props.submitInput(this.state.inputModal);
+                }}>
+                <Text style={this.state.submitDisabled && isInputRequired ?styles.btn_modal_right_disabled:styles.btn_modal_right}>{submitText}</Text>
+              </TouchableOpacity>
             </View>
           </View>
+        </View>
         </TouchableWithoutFeedback>        
       </Modal>
     );
@@ -87,6 +87,9 @@ const styles = StyleSheet.create({
     ...Platform.select({
       android:{
         backgroundColor: 'rgba(0,0,0,0.62)'
+      },
+      ios:{
+        backgroundColor: 'rgba(0,0,0,0.52)'
       }
     }),
   },
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
     marginRight: 30,
     ...Platform.select({
       ios: {
-        backgroundColor:'rgba(220,220,220, 0.9)',
+        backgroundColor:'rgba(220,220,220, 0.98)',
         borderRadius: 10,
         minWidth: 300,
       },
@@ -133,7 +136,7 @@ const styles = StyleSheet.create({
     }),
   },
   message_modal:{
-    fontSize: 16,
+    fontSize: 14,
     ...Platform.select({
       ios: {
         textAlign:'center',
